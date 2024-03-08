@@ -4,75 +4,98 @@ namespace Battleship.Services
 {
     public class SetUpService : ISetUpService
     {
+        private readonly Random _random = new();
+        private const int BoardSize = 10;
+
         public List<List<ShipPosition>> GenerateGameSetup()
         {
-            List<List<ShipPosition>> gameSetup = [];
-            gameSetup.Add(GeneratePlayerSetup());
-            gameSetup.Add(GeneratePlayerSetup());
+            var gameSetup = new List<List<ShipPosition>>
+            {
+                GeneratePlayerSetup(),
+                GeneratePlayerSetup()
+            };
 
             return gameSetup;
         }
 
         private List<ShipPosition> GeneratePlayerSetup()
         {
-            List<ShipPosition> playerSetup = [];
-            int[] shipSizes = [5, 4, 3, 3, 2];
-            bool[,] board = new bool[10, 10];
-            Random random = new();
+            var playerSetup = new List<ShipPosition>();
+            var shipSizes = new[] { 5, 4, 3, 3, 2 };
+            var board = new bool[BoardSize, BoardSize];
 
             foreach (var size in shipSizes)
             {
-                bool placed = false;
-                while (!placed)
-                {
-                    var orientation = random.Next(2) == 0 ? Orientation.Horizontal : Orientation.Vertical;
-                    int startX, startY;
-
-                    if (orientation == Orientation.Horizontal)
-                    {
-                        startX = random.Next(10);
-                        startY = random.Next(11 - size);
-                    }
-                    else
-                    {
-                        startX = random.Next(11 - size);
-                        startY = random.Next(10);
-                    }
-
-                    if (CanPlaceShip(startX, startY, size, orientation, board))
-                    {
-                        PlaceShip(startX, startY, size, orientation, board);
-                        playerSetup.Add(new ShipPosition { Coordinates = (startX, startY), Size = size, Orientation = orientation });
-                        placed = true;
-                    }
-                }
+                PlaceShipOnBoard(size, board, playerSetup);
             }
 
             return playerSetup;
         }
 
-        private static bool CanPlaceShip(int x, int y, int size, Orientation orientation, bool[,] board)
+        private void PlaceShipOnBoard(int shipSize, bool[,] board, List<ShipPosition> playerSetup)
         {
-            for (int i = 0; i < size; i++)
+            var placed = false;
+            while (!placed)
             {
-                int checkX = x + (orientation == Orientation.Vertical ? i : 0);
-                int checkY = y + (orientation == Orientation.Horizontal ? i : 0);
+                var orientation = GetRandomOrientation();
+                var (startX, startY) = GetRandomCoordinates(shipSize, orientation);
 
-                if (board[checkX, checkY]) return false; // This position is already occupied
+                if (IsSpaceAvailable(startX, startY, shipSize, orientation, board))
+                {
+                    RecordShipPlacement(startX, startY, shipSize, orientation, board, playerSetup);
+                    placed = true;
+                }
             }
-
-            return true; // All positions for the ship are free
         }
 
-        private static void PlaceShip(int x, int y, int size, Orientation orientation, bool[,] board)
+        private Orientation GetRandomOrientation()
         {
-            for (int i = 0; i < size; i++)
-            {
-                int placeX = x + (orientation == Orientation.Vertical ? i : 0);
-                int placeY = y + (orientation == Orientation.Horizontal ? i : 0);
+            return _random.Next(2) == 0 ? Orientation.Horizontal : Orientation.Vertical;
+        }
 
-                board[placeX, placeY] = true; // Mark the position as occupied
+        private (int X, int Y) GetRandomCoordinates(int shipSize, Orientation orientation)
+        {
+            if (orientation == Orientation.Horizontal)
+            {
+                return (_random.Next(BoardSize), _random.Next(BoardSize + 1 - shipSize));
             }
+            else
+            {
+                return (_random.Next(BoardSize + 1 - shipSize), _random.Next(BoardSize));
+            }
+        }
+
+        private static bool IsSpaceAvailable(int x, int y, int size, Orientation orientation, bool[,] board)
+        {
+            for (int offset = 0; offset < size; offset++)
+            {
+                var (checkX, checkY) = CalculateOffsetCoordinates(x, y, orientation, offset);
+                if (board[checkX, checkY]) return false;
+            }
+            return true;
+        }
+
+        private static (int X, int Y) CalculateOffsetCoordinates(int x, int y, Orientation orientation, int offset)
+        {
+            if (orientation == Orientation.Vertical)
+            {
+                return (x + offset, y);
+            }
+            else
+            {
+                return (x, y + offset);
+            }
+        }
+
+        private static void RecordShipPlacement(int x, int y, int size, Orientation orientation, bool[,] board, List<ShipPosition> playerSetup)
+        {
+            for (int offset = 0; offset < size; offset++)
+            {
+                var (placeX, placeY) = CalculateOffsetCoordinates(x, y, orientation, offset);
+                board[placeX, placeY] = true;
+            }
+
+            playerSetup.Add(new ShipPosition { Coordinates = (x, y), Size = size, Orientation = orientation });
         }
     }
 }
