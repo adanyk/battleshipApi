@@ -2,7 +2,7 @@
 
 namespace Battleship.Services
 {
-    public interface IGameService
+    public interface ISetUpService
     {
         List<List<ShipPosition>> GenerateGameSetup();
     }

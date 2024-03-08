@@ -1,4 +1,4 @@
-using Battleship.Services;
+using Battleship;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,7 +19,7 @@ builder.Services.AddCors(options =>
         });
 });
 
-builder.Services.AddSingleton<IGameService, GameService>();
+builder.Services.ConfigureApplicationServices();
 
 var app = builder.Build();
 

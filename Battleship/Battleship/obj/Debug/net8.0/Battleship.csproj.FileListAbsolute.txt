@@ -30,3 +30,4 @@ C:\_Local Disk (D)\git\Battleship\Api\battleshipApi\Battleship\Battleship\obj\De
 C:\_Local Disk (D)\git\Battleship\Api\battleshipApi\Battleship\Battleship\obj\Debug\net8.0\Battleship.pdb
 C:\_Local Disk (D)\git\Battleship\Api\battleshipApi\Battleship\Battleship\obj\Debug\net8.0\Battleship.genruntimeconfig.cache
 C:\_Local Disk (D)\git\Battleship\Api\battleshipApi\Battleship\Battleship\obj\Debug\net8.0\ref\Battleship.dll
+C:\_Local Disk (D)\git\Battleship\Api\battleshipApi\Battleship\Battleship\obj\Debug\net8.0\Battleship.sourcelink.json
