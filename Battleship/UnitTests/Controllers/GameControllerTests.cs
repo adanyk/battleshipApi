@@ -1,5 +1,10 @@
+using Battleship.Controllers;
+using Battleship.Models;
 using Battleship.Models.Dtos;
+using Battleship.Services;
 using Microsoft.AspNetCore.Mvc;
+using Moq;
+using Xunit;
 
 namespace UnitTests.Controllers
 {
@@ -17,7 +22,7 @@ namespace UnitTests.Controllers
         }
 
         [Fact]
-        public void StatrGame_Should_ReturnOkResultWithShipPositions()
+        public void GetShipsPositions_Should_ReturnOkResultWithShipPositions()
         {
             // Arrange
             var expected = new List<List<ShipPositionDto>>
@@ -30,7 +35,7 @@ namespace UnitTests.Controllers
                 .Returns(expected);
 
             // Act
-            var result = _sut.StartGame();
+            var result = _sut.GetShipsPositions();
 
             // Assert
             var okResult = Assert.IsType<OkObjectResult>(result);

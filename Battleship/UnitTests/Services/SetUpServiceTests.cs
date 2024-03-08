@@ -1,4 +1,8 @@
-﻿namespace UnitTests.Services
+﻿using Battleship.Models;
+using Battleship.Services;
+using Xunit;
+
+namespace UnitTests.Services
 {
     public class SetUpServiceTests
     {

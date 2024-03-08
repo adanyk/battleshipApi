@@ -17,7 +17,7 @@ namespace Battleship.Controllers
         }
 
         [HttpGet("start")]
-        public IActionResult StartGame()
+        public IActionResult GetShipsPositions()
         {
             var shipsPositions = _gameService.GenerateGameSetup();
             var shipsPositionsDto = _modelMappingService.MapToShipPositionsDto(shipsPositions);

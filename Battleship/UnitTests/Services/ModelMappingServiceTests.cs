@@ -1,4 +1,7 @@
-﻿using Battleship.Models.Dtos;
+﻿using Battleship.Models;
+using Battleship.Models.Dtos;
+using Battleship.Services;
+using Xunit;
 
 namespace UnitTests.Services
 {
