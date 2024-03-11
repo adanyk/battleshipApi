@@ -9,12 +9,12 @@ namespace Battleship.Controllers
     public class GameController(ISetUpService setUpService, IGameplayService gameplayService, IModelMappingService modelMappingService) : ControllerBase
     {
         [HttpGet("start")]
-        public IActionResult GetShipsPositions()
+        public IActionResult GetGameSetup()
         {
             var shipsPositions = setUpService.GenerateGameSetup();
             var shots = gameplayService.GenerateShots(shipsPositions);
 
-            var shipsPositionsDto = modelMappingService.MapToShipPositionsDto(shipsPositions);
+            var shipsPositionsDto = modelMappingService.MapToShipsPositionsDto(shipsPositions);
             var shotsDto = modelMappingService.MapToShotsDto(shots);
 
             var gameSetup = new GameSetupDto

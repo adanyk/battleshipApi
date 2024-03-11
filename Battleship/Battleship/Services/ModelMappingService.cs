@@ -5,13 +5,13 @@ namespace Battleship.Services
 {
     public interface IModelMappingService
     {
-        IEnumerable<IEnumerable<ShipPositionDto>> MapToShipPositionsDto(IEnumerable<IEnumerable<ShipPosition>> shipPositions);
+        IEnumerable<IEnumerable<ShipPositionDto>> MapToShipsPositionsDto(IEnumerable<IEnumerable<ShipPosition>> shipPositions);
         IEnumerable<ShotDto> MapToShotsDto(IEnumerable<Shot> shots);
     }
 
     public class ModelMappingService : IModelMappingService
     {
-        public IEnumerable<IEnumerable<ShipPositionDto>> MapToShipPositionsDto(IEnumerable<IEnumerable<ShipPosition>> shipPositions)
+        public IEnumerable<IEnumerable<ShipPositionDto>> MapToShipsPositionsDto(IEnumerable<IEnumerable<ShipPosition>> shipPositions)
         {
             return shipPositions.Select(row => row.Select(sp => new ShipPositionDto
             {

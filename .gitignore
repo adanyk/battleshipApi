@@ -1,20 +1,39 @@
-.vs/
+# Build folders
 bin/
 obj/
+
+# User-specific files
 *.user
-*.userosscache
 *.suo
+*.userosscache
+
+# VS Code folders
+.vscode/
+.vs/
+
+# Temp files
 *.tmp
 *.temp
 *.bak
+
+# Cache files
 *.[Cc]ache
+*.cache
+
+# Log files
 *.log
+
+# Compiled binary and intermediate files
 *.dll
 *.exe
 *.pdb
 *.obj
-*.pdb
 *.ilk
 *.exp
-/.vscode/  # If using Visual Studio Code
 
+# NuGet Packages
+*.nupkg
+packages/
+
+# Editor-specific files
+*.swp
