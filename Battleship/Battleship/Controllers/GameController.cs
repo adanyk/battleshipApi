@@ -5,22 +5,13 @@ namespace Battleship.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class GameController : ControllerBase
+    public class GameController(ISetUpService setUpService, IModelMappingService modelMappingService) : ControllerBase
     {
-        private readonly ISetUpService _gameService;
-        private readonly IModelMappingService _modelMappingService;
-
-        public GameController(ISetUpService gameService, IModelMappingService modelMappingService)
-        {
-            _gameService = gameService;
-            _modelMappingService = modelMappingService;
-        }
-
         [HttpGet("start")]
         public IActionResult GetShipsPositions()
         {
-            var shipsPositions = _gameService.GenerateGameSetup();
-            var shipsPositionsDto = _modelMappingService.MapToShipPositionsDto(shipsPositions);
+            var shipsPositions = setUpService.GenerateGameSetup();
+            var shipsPositionsDto = modelMappingService.MapToShipPositionsDto(shipsPositions);
             return Ok(shipsPositionsDto);
         }
     }
