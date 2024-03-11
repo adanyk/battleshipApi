@@ -15,7 +15,7 @@ namespace UnitTests.Services
         }
 
         [Fact]
-        public void MapToShipPositionsDto_ShouldCorrectlyTransformShipPositionToDto()
+        public void MapToShipsPositionsDto_ShouldCorrectlyTransformShipsPositionsToDto()
         {
             // Arrange
             var shipPositions = new List<List<ShipPosition>>
@@ -48,7 +48,7 @@ namespace UnitTests.Services
             };
 
             // Act
-            var result = _sut.MapToShipPositionsDto(shipPositions);
+            var result = _sut.MapToShipsPositionsDto(shipPositions);
 
             // Assert
             var returnValue = Assert.IsAssignableFrom<IEnumerable<IEnumerable<ShipPositionDto>>>(result);

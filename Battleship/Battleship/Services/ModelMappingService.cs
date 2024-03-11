@@ -5,12 +5,13 @@ namespace Battleship.Services
 {
     public interface IModelMappingService
     {
-        IEnumerable<IEnumerable<ShipPositionDto>> MapToShipPositionsDto(IEnumerable<IEnumerable<ShipPosition>> shipPositions);
+        IEnumerable<IEnumerable<ShipPositionDto>> MapToShipsPositionsDto(IEnumerable<IEnumerable<ShipPosition>> shipPositions);
+        IEnumerable<ShotDto> MapToShotsDto(IEnumerable<Shot> shots);
     }
 
     public class ModelMappingService : IModelMappingService
     {
-        public IEnumerable<IEnumerable<ShipPositionDto>> MapToShipPositionsDto(IEnumerable<IEnumerable<ShipPosition>> shipPositions)
+        public IEnumerable<IEnumerable<ShipPositionDto>> MapToShipsPositionsDto(IEnumerable<IEnumerable<ShipPosition>> shipPositions)
         {
             return shipPositions.Select(row => row.Select(sp => new ShipPositionDto
             {
@@ -19,6 +20,11 @@ namespace Battleship.Services
                 Top = $"{sp.Coordinates.X * 10}%",
                 Left = $"{sp.Coordinates.Y * 10}%"
             }));
+        }
+
+        public IEnumerable<ShotDto> MapToShotsDto(IEnumerable<Shot> shots)
+        {
+            throw new NotImplementedException();
         }
     }
 }

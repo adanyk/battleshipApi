@@ -1,27 +1,29 @@
-﻿using Battleship.Services;
+﻿using Battleship.Models.Dtos;
+using Battleship.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Battleship.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class GameController : ControllerBase
+    public class GameController(ISetUpService setUpService, IGameplayService gameplayService, IModelMappingService modelMappingService) : ControllerBase
     {
-        private readonly ISetUpService _gameService;
-        private readonly IModelMappingService _modelMappingService;
-
-        public GameController(ISetUpService gameService, IModelMappingService modelMappingService)
-        {
-            _gameService = gameService;
-            _modelMappingService = modelMappingService;
-        }
-
         [HttpGet("start")]
-        public IActionResult GetShipsPositions()
+        public IActionResult GetGameSetup()
         {
-            var shipsPositions = _gameService.GenerateGameSetup();
-            var shipsPositionsDto = _modelMappingService.MapToShipPositionsDto(shipsPositions);
-            return Ok(shipsPositionsDto);
+            var shipsPositions = setUpService.GenerateGameSetup();
+            var shots = gameplayService.GenerateShots(shipsPositions);
+
+            var shipsPositionsDto = modelMappingService.MapToShipsPositionsDto(shipsPositions);
+            var shotsDto = modelMappingService.MapToShotsDto(shots);
+
+            var gameSetup = new GameSetupDto
+            {
+                ShipsPositions = shipsPositionsDto,
+                Shots = shotsDto
+            };
+
+            return Ok(gameSetup);
         }
     }
 }

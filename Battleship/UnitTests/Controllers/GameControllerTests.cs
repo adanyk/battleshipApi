@@ -11,36 +11,42 @@ namespace UnitTests.Controllers
     public class GameControllerTests
     {
         private readonly Mock<ISetUpService> _setUpServiceMock;
+        private readonly Mock<IGameplayService> _gameplayService;
         private readonly Mock<IModelMappingService> _modelMappingServiceMock;
         private readonly GameController _sut;
 
         public GameControllerTests()
         {
             _setUpServiceMock = new Mock<ISetUpService>();
+            _gameplayService = new Mock<IGameplayService>();
             _modelMappingServiceMock = new Mock<IModelMappingService>();
-            _sut = new GameController(_setUpServiceMock.Object, _modelMappingServiceMock.Object);
+            _sut = new GameController(_setUpServiceMock.Object, _gameplayService.Object, _modelMappingServiceMock.Object);
         }
 
         [Fact]
-        public void GetShipsPositions_Should_ReturnOkResultWithShipPositions()
+        public void GetGameSetup_Should_ReturnOkResultWithGameSetup()
         {
             // Arrange
-            var expected = new List<List<ShipPositionDto>>
+            var shipsPositions = new List<List<ShipPositionDto>>
             {
                 new() { new ShipPositionDto(), new ShipPositionDto() },
                 new() { new ShipPositionDto(), new ShipPositionDto() }
             };
+            var shots = new List<ShotDto> { new(), new() };
+            var expected = new GameSetupDto { ShipsPositions = shipsPositions, Shots = shots };
 
-            _modelMappingServiceMock.Setup(x => x.MapToShipPositionsDto(It.IsAny<IEnumerable<IEnumerable<ShipPosition>>>()))
-                .Returns(expected);
+            _modelMappingServiceMock.Setup(x => x.MapToShipsPositionsDto(It.IsAny<IEnumerable<IEnumerable<ShipPosition>>>()))
+                .Returns(shipsPositions);
+            _modelMappingServiceMock.Setup(x => x.MapToShotsDto(It.IsAny<IEnumerable<Shot>>()))
+                .Returns(shots);
 
             // Act
-            var result = _sut.GetShipsPositions();
+            var result = _sut.GetGameSetup();
 
             // Assert
             var okResult = Assert.IsType<OkObjectResult>(result);
-            var returnValue = Assert.IsType<List<List<ShipPositionDto>>>(okResult.Value);
-            Assert.Equal(expected, returnValue);
+            var returnValue = Assert.IsType<GameSetupDto>(okResult.Value);
+            Assert.Equivalent(expected, returnValue);
         }
     }
 }
