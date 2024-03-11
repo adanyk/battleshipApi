@@ -7,7 +7,7 @@ namespace Battleship.Services
         private readonly Random _random = new();
         private const int BoardSize = 10;
 
-        public List<List<ShipPosition>> GenerateGameSetup()
+        public IEnumerable<IEnumerable<ShipPosition>> GenerateGameSetup()
         {
             var gameSetup = new List<List<ShipPosition>>
             {

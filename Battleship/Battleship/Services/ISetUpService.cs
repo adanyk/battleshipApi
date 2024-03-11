@@ -4,6 +4,6 @@ namespace Battleship.Services
 {
     public interface ISetUpService
     {
-        List<List<ShipPosition>> GenerateGameSetup();
+        IEnumerable<IEnumerable<ShipPosition>> GenerateGameSetup();
     }
 }
