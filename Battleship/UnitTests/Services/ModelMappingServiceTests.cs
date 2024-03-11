@@ -15,7 +15,7 @@ namespace UnitTests.Services
         }
 
         [Fact]
-        public void MapToShipsPositionsDto_ShouldCorrectlyTransformShipPositionToDto()
+        public void MapToShipsPositionsDto_ShouldCorrectlyTransformShipsPositionsToDto()
         {
             // Arrange
             var shipPositions = new List<List<ShipPosition>>
