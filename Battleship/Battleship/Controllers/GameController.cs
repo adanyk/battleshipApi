@@ -14,12 +14,12 @@ namespace Battleship.Controllers
             var ships = setUpService.GenerateGameSetup();
             var shots = gameplayService.GenerateShots(ships);
 
-            var shipsDto = modelMappingService.MapToShipsPositionsDto(ships);
+            var shipsDto = modelMappingService.MapToShipsDto(ships);
             var shotsDto = modelMappingService.MapToShotsDto(shots);
 
             var gameSetup = new GameSetupDto
             {
-                ShipsPositions = shipsDto,
+                Ships = shipsDto,
                 Shots = shotsDto
             };
 

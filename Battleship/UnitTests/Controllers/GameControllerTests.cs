@@ -33,9 +33,9 @@ namespace UnitTests.Controllers
                 new() { new ShipDto(), new ShipDto() }
             };
             var shots = new List<ShotDto> { new(), new() };
-            var expected = new GameSetupDto { ShipsPositions = ships, Shots = shots };
+            var expected = new GameSetupDto { Ships = ships, Shots = shots };
 
-            _modelMappingServiceMock.Setup(x => x.MapToShipsPositionsDto(It.IsAny<IEnumerable<IEnumerable<Ship>>>()))
+            _modelMappingServiceMock.Setup(x => x.MapToShipsDto(It.IsAny<IEnumerable<IEnumerable<Ship>>>()))
                 .Returns(ships);
             _modelMappingServiceMock.Setup(x => x.MapToShotsDto(It.IsAny<IEnumerable<Shot>>()))
                 .Returns(shots);

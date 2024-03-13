@@ -14,7 +14,7 @@ namespace UnitTests.Services
         }
 
         [Fact]
-        public void GenerateGameSetup_ShouldReturnNestedEnumerableOfShipPosition()
+        public void GenerateGameSetup_ShouldReturnNestedListOfShip()
         {
             // Act
             var result = _sut.GenerateGameSetup();

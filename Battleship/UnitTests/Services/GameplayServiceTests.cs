@@ -14,7 +14,7 @@ namespace UnitTests.Services
         }
 
         [Fact]
-        public void GenerateShots_ShouldReturnEnumerableOfShot()
+        public void GenerateShots_ShouldReturnListOfShot()
         {
             // Arrange
             var ships = new List<List<Ship>>

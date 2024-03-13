@@ -35,9 +35,9 @@ namespace Battleship.Services
 
         private static IEnumerable<IEnumerable<(int X, int Y)>> GetShips(List<Ship> ships)
         {
-            return ships.Select(sp =>
-                Enumerable.Range(0, sp.Size)
-                          .Select(offset => CalculateOffsetCoordinates(sp, offset))
+            return ships.Select(ship =>
+                Enumerable.Range(0, ship.Size)
+                          .Select(offset => CalculateOffsetCoordinates(ship, offset))
                           .ToList()
             ).ToList();
         }
