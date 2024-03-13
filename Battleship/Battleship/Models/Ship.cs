@@ -1,6 +1,6 @@
 ﻿namespace Battleship.Models
 {
-    public class ShipPosition
+    public class Ship
     {
         public (int X, int Y) Coordinates { get; set; }
         public int Size { get; set; }

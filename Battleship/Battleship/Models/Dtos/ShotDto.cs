@@ -2,8 +2,8 @@
 {
     public class ShotDto
     {
-        public string? CoorX { get; set; }
-        public string? CoorY { get; set; }
+        public int? CoorX { get; set; }
+        public int? CoorY { get; set; }
         public string? Result { get; set; }
     }
 }
