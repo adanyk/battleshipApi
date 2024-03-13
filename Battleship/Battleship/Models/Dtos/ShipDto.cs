@@ -1,6 +1,6 @@
 ﻿namespace Battleship.Models.Dtos
 {
-    public class ShipPositionDto
+    public class ShipDto
     {
         public string? Width { get; set; }
         public string? Height { get; set; }

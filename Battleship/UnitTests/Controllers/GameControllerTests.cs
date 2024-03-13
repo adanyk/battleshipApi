@@ -27,16 +27,16 @@ namespace UnitTests.Controllers
         public void GetGameSetup_Should_ReturnOkResultWithGameSetup()
         {
             // Arrange
-            var shipsPositions = new List<List<ShipPositionDto>>
+            var ships = new List<List<ShipDto>>
             {
-                new() { new ShipPositionDto(), new ShipPositionDto() },
-                new() { new ShipPositionDto(), new ShipPositionDto() }
+                new() { new ShipDto(), new ShipDto() },
+                new() { new ShipDto(), new ShipDto() }
             };
             var shots = new List<ShotDto> { new(), new() };
-            var expected = new GameSetupDto { ShipsPositions = shipsPositions, Shots = shots };
+            var expected = new GameSetupDto { ShipsPositions = ships, Shots = shots };
 
-            _modelMappingServiceMock.Setup(x => x.MapToShipsPositionsDto(It.IsAny<IEnumerable<IEnumerable<ShipPosition>>>()))
-                .Returns(shipsPositions);
+            _modelMappingServiceMock.Setup(x => x.MapToShipsPositionsDto(It.IsAny<IEnumerable<IEnumerable<Ship>>>()))
+                .Returns(ships);
             _modelMappingServiceMock.Setup(x => x.MapToShotsDto(It.IsAny<IEnumerable<Shot>>()))
                 .Returns(shots);
 

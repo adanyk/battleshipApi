@@ -8,6 +8,7 @@ namespace Battleship
         {
             services.AddSingleton<ISetUpService, SetUpService>();
             services.AddScoped<IModelMappingService, ModelMappingService>();
+            services.AddScoped<IGameplayService, GameplayService>();
         }
     }
 }

@@ -14,13 +14,13 @@ namespace UnitTests.Services
         }
 
         [Fact]
-        public void GenerateGameSetup_Should_()
+        public void GenerateGameSetup_ShouldReturnNestedEnumerableOfShipPosition()
         {
             // Act
             var result = _sut.GenerateGameSetup();
 
             // Assert
-            Assert.IsAssignableFrom<IEnumerable<IEnumerable<ShipPosition>>>(result);
+            Assert.IsAssignableFrom<List<List<Ship>>>(result);
         }
     }
 }
