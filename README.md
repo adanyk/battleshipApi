@@ -1,9 +1,26 @@
 # Battleship Api
-
 This project is the backend API for the Battleship game simulator, built using .NET 8. It handles the game logic, including the random placement of ships and the simulation of gameplay between two players.
 
-## Getting Started
+## Shortcut
+Clone the repositories and run the application locally in one go:
+```
+git clone https://github.com/adanyk/battleshipApi/
+cd battleshipApi
+dotnet run --project Battleship/Battleship/Battleship.csproj --urls="https://localhost:7120" &
+BACKEND_PID=$!
 
+# Wait a bit for the backend to initialize (adjust the sleep duration as needed)
+sleep 10
+
+# Clone and start the frontend
+cd ..
+git clone https://github.com/adanyk/battleshipWeb/
+cd battleshipWeb
+npm install
+ng serve --open
+```
+
+## Getting Started step-by-step
 Ensure you have [.NET SDK](https://dotnet.microsoft.com/en-us/download) installed to run this project, then follow the steps:
 
 1. Clone the repository:
